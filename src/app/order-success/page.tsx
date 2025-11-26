@@ -1,10 +1,13 @@
 // src/app/order-success/page.tsx
+
 "use client";
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react"; // <-- 1. IMPOR SUSPENSE
 
-export default function OrderSuccessPage() {
+// 2. PISAHKAN LOGIKA UTAMA KE KOMPONEN BARU (MISAL: OrderContent)
+function OrderContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
 
@@ -22,5 +25,17 @@ export default function OrderSuccessPage() {
         Lanjut Belanja
       </Link>
     </div>
+  );
+}
+
+// 3. KOMPONEN UTAMA HANYA BERTUGAS MEMBUNGKUS DENGAN SUSPENSE
+export default function OrderSuccessPage() {
+  return (
+    // Fallback adalah apa yang muncul selagi URL sedang dibaca
+    <Suspense
+      fallback={<p className="text-center py-20">Memuat data pesanan...</p>}
+    >
+      <OrderContent />
+    </Suspense>
   );
 }
