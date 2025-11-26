@@ -56,7 +56,7 @@ export default function AddProductPage() {
         const fileName = `${Date.now()}-${imageFile.name}`;
 
         // Upload ke bucket 'images'
-        const { data: uploadData, error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from("images") // Pastikan nama bucket Anda benar!
           .upload(fileName, imageFile);
 
@@ -84,9 +84,13 @@ export default function AddProductPage() {
 
       alert("Produk berhasil ditambahkan!");
       router.push("/admin"); // Kembali ke dashboard
-    } catch (error: any) {
+    } catch (error: unknown) {
+      let errorMessage = "Gagal menambahkan produk.";
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      }
       console.error("Error:", error);
-      alert("Gagal menambahkan produk: " + error.message);
+      alert("Gagal menambahkan produk: " + errorMessage);
     } finally {
       setIsUploading(false);
     }

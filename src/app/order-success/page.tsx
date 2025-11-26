@@ -3,7 +3,6 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 
 export default function OrderSuccessPage() {
   const searchParams = useSearchParams();

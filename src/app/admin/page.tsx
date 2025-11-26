@@ -41,7 +41,7 @@ export default function AdminPage() {
   // 2. Fetch Data Produk (Hanya jika admin)
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("products")
         .select("*")
         .order("id", { ascending: false }); // Produk terbaru di atas
