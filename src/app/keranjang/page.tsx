@@ -93,9 +93,11 @@ export default function CartPage() {
             <span>Subtotal</span>
             <span>Rp {subtotal.toLocaleString("id-ID")}</span>
           </div>
-          <button className="mt-4 w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 rounded-md">
-            Lanjutkan ke Checkout
-          </button>
+          <Link href="/checkout">
+            <button className="mt-4 w-full bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 rounded-md">
+              Lanjutkan ke Checkout
+            </button>
+          </Link>
         </div>
       </div>
     </div>

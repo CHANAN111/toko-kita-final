@@ -7,6 +7,8 @@ import Footer from "../components/Footer";
 
 import AuthProvider from "@/components/AuthProvider";
 
+import Toast from "@/components/Toast";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -26,6 +28,7 @@ export default function RootLayout({
           <Navbar />
           <main className="container mx-auto p-4 min-h-screen">{children}</main>
           <Footer />
+          <Toast />
         </AuthProvider>
       </body>
     </html>

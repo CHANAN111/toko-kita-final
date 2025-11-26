@@ -1,9 +1,10 @@
-"use client"; // tandai sebagai client component
+// src/components/AddToCartButton.tsx
+
+"use client";
 
 import { useCartStore, CartItem } from "@/store/cartStore";
+import { useUIStore } from "@/store/uiStore"; // <-- 1. IMPOR STORE UI
 
-// definisikan tipe untuk props yang akan diterima komponen ini
-// kita hanya butuh sebagian data produk untuk dimasukan ke keranjang
 type ProductForCart = Omit<CartItem, "quantity">;
 
 type AddToCartButtonProps = {
@@ -11,19 +12,20 @@ type AddToCartButtonProps = {
 };
 
 export default function AddToCartButton({ product }: AddToCartButtonProps) {
-  // panggil 'store' kita dan ambil fungsi 'addToCart'
   const { addToCart } = useCartStore();
+  const { showToast } = useUIStore(); // <-- 2. AMBIL FUNGSI SHOWTOAST
 
   const handleAddToCart = () => {
     addToCart(product);
-    // beri notifikasi sederhana ke pengguna
-    alert(`"${product.name}" telah ditambahkan ke keranjang!`);
+
+    // 3. PANGGIL NOTIFIKASI KEREN KITA
+    showToast(`Berhasil menambahkan ${product.name} ke keranjang!`, "success");
   };
 
   return (
     <button
       onClick={handleAddToCart}
-      className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-lg text-lg w-full"
+      className="mt-6 bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-lg text-lg w-full active:scale-95 transition-transform"
     >
       Tambah ke Keranjang
     </button>
